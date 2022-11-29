@@ -11,6 +11,20 @@ import { SensorsDataComponent } from './dashboard/sensors-data/sensors-data.comp
 import { AboutPageComponent } from './about-page/about-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+
+
 
 @NgModule({
   declarations: [
@@ -28,9 +42,19 @@ import {MatIconModule} from '@angular/material/icon';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatGridListModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatCardModule,
+    MatTableModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatPaginatorModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,2 +1,14 @@
-<app-add-sensors-data></app-add-sensors-data>
-<app-sensors-data></app-sensors-data>
+
+<app-add-sensors-data class="flex-container"></app-add-sensors-data>
+
+<app-sensors-data class="flex-container"></app-sensors-data>
+
+<mat-paginator
+  (page)="handlePageEvent($event)"
+  [length]="totalSize"
+  [pageSize]="sizePerPage"
+  [pageIndex]="pageIndex"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page"
+>
+</mat-paginator>

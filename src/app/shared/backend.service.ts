@@ -10,6 +10,9 @@ import { StoreService } from './store.service';
   providedIn: 'root'
 })
 export class BackendService {
+  page: number = 1;
+  sensorsPerPage: number = 10;
+  entryCount: number = 0;
 
   constructor(private storeService: StoreService, private http: HttpClient) { }
 
@@ -21,13 +24,17 @@ export class BackendService {
   }
 
   public async getSensorenDaten() {
-    const sensorenDataResponse = await firstValueFrom(this.http.get<SensorendataResponse[]>(`http://localhost:5000/sensorsData`));
-    const sensorenData: Sensorendata[]= sensorenDataResponse.map(data => {
+    const sensorenDataResponse = await firstValueFrom(this.http.get<any>(
+      `http://localhost:5000/sensorsData?_page=${this.page}&_limit=${this.sensorsPerPage}`, { observe: 'response' }));
+    this.entryCount = Number(sensorenDataResponse.headers.get('X-Total-Count'));
+    const sensorenData: Sensorendata[] = sensorenDataResponse.body.map((data: { sensorId: number; }) => {
       const sensor: Sensor = this.sensoren.filter(sensor => sensor.id == data.sensorId)[0];
       return { ...data, sensor }
     });
     this.storeService.sensorenDaten = sensorenData;
+    console.log('Getting sensor data with page: ' + this.page + ' sensorsPerPage: ' + this.sensorsPerPage + ' total: ' + this.entryCount);
   }
+
 
   public async addSensorsData(sensorenData: Sensorendata[]) {
     await firstValueFrom(this.http.post('http://localhost:5000/sensorsData', sensorenData));

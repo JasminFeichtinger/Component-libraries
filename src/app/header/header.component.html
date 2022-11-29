@@ -1,9 +1,14 @@
 <div class="flex-container">
+    <img style="padding: 10px;" src={{imagePath}}>
     <h1>{{ title }}</h1>
-    <img src={{imagePath}}>
     <div class="right-menu-section">
-        <a [routerLink]="['/dashboard']">Dashboard</a>
-        <a [routerLink]="['/about']">About</a>
+
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/about']">About</button>
+        <button mat-menu-item [routerLink]="['/dashboard']">Dashboard</button>
+      </mat-menu>
+
     </div>
 </div>
 
@@ -11,4 +16,7 @@
 <span class="span-1">This is a span</span>
 <img class="img" src="https://source.unsplash.com/xfngap_DToE">
 <span class="span-2">This is another span</span>
-<div class="div-2">This is another div</div> -->
+<div class="div-2">This is another div</div>
+
+
+<a [routerLink]="['/about']">About</a>-->
